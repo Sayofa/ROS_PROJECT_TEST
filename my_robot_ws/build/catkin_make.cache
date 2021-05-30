@@ -1,0 +1,2 @@
+gazebo_pkg:mybot_control:mybot_description:mybot_nav:mybot_nvgstk
+-DCATKIN_DEVEL_PREFIX=/home/seif/my_robot_ws/devel -DCMAKE_INSTALL_PREFIX=/home/seif/my_robot_ws/install -G Unix Makefiles
