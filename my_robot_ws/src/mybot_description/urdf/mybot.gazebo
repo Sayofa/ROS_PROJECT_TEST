@@ -2,7 +2,6 @@
 <!--  A gazebo plugin file that connect the URDF-written robot with the following gazebo plugins
 1:"differential_drive_controller"  for differential drive simulation  
 2:"camera_controller " for kinect simulation
-Written by Muhammad Asem m7mad3asem@gmail.com
 /-->
 
 <robot>

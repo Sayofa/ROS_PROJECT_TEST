@@ -4,7 +4,7 @@
   <master auto="start"/>
 
   <!-- Map server -->
-  <arg name="map_file" default="$(find mybot_nav)/maps/test_map.yaml"/>
+  <arg name="map_file" default="$(find mybot_2dnav)/maps/test_map.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
 
@@ -22,22 +22,58 @@
     <param name="base_frame_id" value="chassis"/>
     <param name="update_min_d" value="0.5"/>
     <param name="update_min_a" value="1.0"/>
+
+    <param name="min_particles" value="15"/>
+    <param name="max_particles" value="100"/>
+    <param name="recovery_alpha_fast" value="0.750"/>
+    <param name="recovery_alpha_slow" value="0.01"/>
+    <param name="initial_pose" value="[0 0 0]"/>
+    <param name="update_min_d" value="0.15"/>
+    <param name="update_min_a" value="0.785"/>
+    <param name="resample_interval" value="5"/>
+
+    <param name="laser_model_type" value="likelihood_field"/>
+    <param name="laser_min_range" value="0.02"/>
+    <param name="laser_max_range" value="15.0"/>
+    <param name="laser_z_hit" value="0.90"/>
+    <param name="laser_z_rand" value="0.250"/>
+    <param name="laser_max_beams" value="20"/>
+    <param name="laser_sigma_hit" value="0.20"/>
+    <param name="laser_likelihood_max_dist" value="3.50"/>
+
+    <param name="odom_model_type" value="diff-corrected"/>
+    <param name="odom_alpha1" value="0.2"/>
+    <param name="odom_alpha2" value="0.2"/>
+    <param name="odom_alpha3" value="0.2"/>
+    <param name="odom_alpha4" value="0.2"/>
+
+
+
   </node>
+
+
+  
+
   <!--include file="$(find amcl)/examples/amcl_omni.launch"/-->
 
 
 
   <!-- Move base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(find mybot_nav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find mybot_nav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find mybot_nav)/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find mybot_nav)/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find mybot_nav)/config/base_local_planner_params.yaml" command="load" />
+ 
+<rosparam file="$(find mybot_2dnav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    
+<rosparam file="$(find mybot_2dnav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    
+    <rosparam file="$(find mybot_2dnav)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find mybot_2dnav)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find mybot_2dnav)/config/base_local_planner_params.yaml" command="load" />
+ 
 
     <remap from="cmd_vel" to="cmd_vel"/>
     <remap from="odom" to="odom"/>
     <remap from="scan" to="mybot/laser/scan"/>
+
     <param name="move_base/DWAPlannerROS/yaw_goal_tolerance" value="1.0"/>
     <param name="move_base/DWAPlannerROS/xy_goal_tolerance" value="1.0"/>
 
